@@ -406,7 +406,7 @@
             if (UseAbsolutePositioning)
                 worldLocation = Position + PositionOffset;
             else
-                worldLocation = Position.ConsoleLocationToWorld(CellSize.X, CellSize.Y) + PositionOffset.ConsoleLocationToWorld(CellSize.X, CellSize.Y);
+                worldLocation = Position.ConsoleLocationToWorld(CellSize.X, CellSize.Y) + PositionOffset.ConsoleLocationToWorld(CellSize.X, CellSize.Y) - new Point(CellSize.X / 2, CellSize.Y / 2);
 
             return Matrix.CreateTranslation(worldLocation.X, worldLocation.Y, 0f) * Matrix.CreateTranslation(-_currentAnimation.Center.X * _font.CellWidth, -_currentAnimation.Center.Y * _font.CellHeight, 0f);
         }

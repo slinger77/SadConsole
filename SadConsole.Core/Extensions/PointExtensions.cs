@@ -6,7 +6,7 @@ namespace Microsoft.Xna.Framework
     {
         public static Point ConsoleLocationToWorld(this Point point, int cellWidth, int cellHeight)
         {
-            return new Point(point.X * cellWidth, point.Y * cellHeight);
+            return new Point(point.X * cellWidth + (cellWidth / 2), point.Y * cellHeight + (cellHeight / 2));
         }
 
         public static Point WorldLocationToConsole(this Point point, int cellWidth, int cellHeight)

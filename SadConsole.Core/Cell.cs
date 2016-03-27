@@ -14,6 +14,8 @@ namespace SadConsole
         private Color _foreground;
         private Color _background;
         private SpriteEffects _spriteEffect;
+        private int _rotation;
+        private int _actualRotation;
 
         /// <summary>
         /// The desired foreground color of this cell. When set, copies the value to ActualForeground.
@@ -66,16 +68,43 @@ namespace SadConsole
             set { _spriteEffect = value; ActualSpriteEffect = value; }
         }
 
+        [DataMember]
+        /// <summary>
+        /// Rotates the cell (foreground character only) when rendering the cell.
+        /// </summary>
+        public int Rotation
+        {
+            get { return _rotation; }
+            set { _rotation = value; ActualRotation = value; }
+        }
+
+        [DataMember]
+        /// <summary>
+        /// Rotates the cell (foreground character only) when rendering the cell.
+        /// <remarks>The actual rotation may or may not match the desired rotation. When cell effects are processed, they may change this value. If the cell effect is removed, the actual rotation is taken from desired rotation.</remarks>
+        /// </summary>
+        public int ActualRotation
+        {
+            get { return _actualRotation; }
+            set
+            {
+                _actualRotation = value;
+                RotationInRadians = (float)(value * (System.Math.PI / 180));
+            }
+        }
+
         /// <summary>
         /// The actual foreground color of this cell when drawing.
         /// <remarks>The actual foreground may or may not match the desired foreground. When effects are processed, they will normally set this value. If the effect is removed, the actual foreground color is taken from desired foreground color.</remarks>
         /// </summary>
+        [DataMember]
         public virtual Color ActualForeground { get; set; }
 
         /// <summary>
         /// The actual background color of this cell when drawing.
         /// <remarks>The actual background may or may not match the desired background. When effects are processed, they will normally set this value. If the effect is removed, the actual background color is taken from desired background color.</remarks>
         /// </summary>
+        [DataMember]
         public virtual Color ActualBackground { get; set; }
 
 
@@ -83,20 +112,21 @@ namespace SadConsole
         /// The actual character index of this cell when drawing.
         /// <remarks>The actual index may or may not match the desired index. When effects are processed, they may change this value. If the effect is removed, the actual index is taken from desired index.</remarks>
         /// </summary>
+        [DataMember]
         public virtual int ActualCharacterIndex { get; set; }
 
         /// <summary>
-        /// The effect associated with this cell. Processed by the <see cref="T:SadConsole.CellSurface"/> class.
+        /// The effect associated with this cell. Processed by the <see cref="SadConsole.CellSurface"/> class.
         /// </summary>
         public Effects.ICellEffect Effect { get; set; }
 
         /// <summary>
-        /// The index of the cell in the parent <see cref="T:SadConsole.CellSurface"/>.
+        /// The index of the cell in the parent <see cref="SadConsole.CellSurface"/>.
         /// </summary>
         public int Index { get; set; }
 
         /// <summary>
-        /// The position of the cell in the parent <see cref="T:SadConsole.CellSurface"/>.
+        /// The position of the cell in the parent <see cref="SadConsole.CellSurface"/>.
         /// </summary>
         public Point Position { get; set; }
 
@@ -112,6 +142,11 @@ namespace SadConsole
         /// <remarks>The actual sprite effect may or may not match the desired sprite effect. When cell effects are processed, they may change this value. If the cell effect is removed, the actual sprite effect is taken from desired sprite effect.</remarks>
         /// </summary>
         public SpriteEffects ActualSpriteEffect { get; set; }
+        
+
+        [DataMember]
+        public float RotationInRadians { get; private set; }
+
 
         #region Constructors
         public Cell()
@@ -129,6 +164,7 @@ namespace SadConsole
             Background = Color.Transparent;
             CharacterIndex = 0;
             IsVisible = true;
+            Rotation = 0;
         }
 
         /// <summary>
@@ -137,7 +173,7 @@ namespace SadConsole
         /// <returns>A string representing this cell.</returns>
         public override string ToString()
         {
-            return string.Format("{0} {1} {2}", ActualCharacterIndex, ActualForeground.ToString(), ActualBackground.ToString());
+            return string.Format("{0} {1} {2} {3}", ActualCharacterIndex, ActualForeground.ToString(), ActualBackground.ToString(), ActualRotation);
         }
 
         /// <summary>
@@ -171,7 +207,7 @@ namespace SadConsole
         }
 
         /// <summary>
-        /// Updates and applies the <see cref="P:SadConsole.Cell.Effect"/> to this cell. WARNING: Do not use with CellSurface. This should only be called when the cell has a standalone effect that isn't managed by the CellSurface.
+        /// Updates and applies the <see cref="SadConsole.Cell.Effect"/> to this cell. WARNING: Do not use with CellSurface. This should only be called when the cell has a standalone effect that isn't managed by the CellSurface.
         /// </summary>
         public void UpdateAndApplyEffect(double elapsedTime)
         {

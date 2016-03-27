@@ -256,12 +256,16 @@
         {
             if (IsVisible && _isReady)
             {
+                var cellCenter = new Vector2(_font.CellWidth / 2, _font.CellHeight / 2);
+
                 Matrix transform;
 
                 if (Transform.HasValue)
                     transform = Transform.Value;
                 else
                     transform = GetPositionTransform();
+                
+                
 
                 if (!_skipBatchBeginEnd)
                     Batch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.DepthRead, RasterizerState.CullNone, null, transform);
@@ -275,6 +279,20 @@
                     if (CellData.DefaultBackground.A != 0)
                         Batch.Draw(Engine.BackgroundCell, _tintArea, null, CellData.DefaultBackground);
 
+                    //for (int i = 0; i < _renderAreaRects.Length; i++)
+                    //{
+                    //    cell = _renderAreaCells[i];
+
+                    //    if (cell.IsVisible)
+                    //    {
+                    //        if (cell.ActualBackground != Color.Transparent && cell.ActualBackground != CellData.DefaultBackground)
+                    //            Batch.Draw(Engine.BackgroundCell, _renderAreaRects[i], null, cell.ActualBackground, 0f, cellCenter, SpriteEffects.None, 0.1f);
+                    //    }
+                    //}
+
+                    var font = this.Font;
+                    var image = font.Image;
+
                     for (int i = 0; i < _renderAreaRects.Length; i++)
                     {
                         cell = _renderAreaCells[i];
@@ -282,30 +300,23 @@
                         if (cell.IsVisible)
                         {
                             if (cell.ActualBackground != Color.Transparent && cell.ActualBackground != CellData.DefaultBackground)
-                                Batch.Draw(Engine.BackgroundCell, _renderAreaRects[i], null, cell.ActualBackground, 0f, Vector2.Zero, SpriteEffects.None, 0.1f);
-                        }
-                    }
+                                Batch.Draw(image, _renderAreaRects[i], font.SolidCharacterRectangle, cell.ActualBackground, cell.RotationInRadians, cellCenter, SpriteEffects.None, 0.1f);
 
-                    for (int i = 0; i < _renderAreaRects.Length; i++)
-                    {
-                        cell = _renderAreaCells[i];
-
-                        if (cell.IsVisible)
-                        {
                             // "Print" the foreground of the cell on top of the background
                             if (cell.ActualForeground != Color.Transparent)
-                                Batch.Draw(this.Font.Image, _renderAreaRects[i], Font.CharacterIndexRects[cell.ActualCharacterIndex], cell.ActualForeground, 0f, Vector2.Zero, cell.ActualSpriteEffect, 0.1f);
+                                Batch.Draw(image, _renderAreaRects[i], font.CharacterIndexRects[cell.ActualCharacterIndex], cell.ActualForeground, cell.RotationInRadians, cellCenter, cell.ActualSpriteEffect, 0.2f);
                         }
                     }
 
                     OnAfterRender();
 
+                    //TO FIX
                     if (Tint.A != 0)
-                        Batch.Draw(Engine.BackgroundCell, _tintArea, null, Tint);
+                        Batch.Draw(image, _tintArea, font.SolidCharacterRectangle, Tint, 0f, new Vector2((cellCenter.X * 2) / _tintArea.Width, cellCenter.Y / _tintArea.Height), SpriteEffects.None, 0.1f);
                 }
                 else
                 {
-                    Batch.Draw(Engine.BackgroundCell, _tintArea, null, Tint);
+                    Batch.Draw(Engine.BackgroundCell, _tintArea, null, Tint, 0f, cellCenter, SpriteEffects.None, 0.1f);
                 }
 
                 if (!_skipBatchBeginEnd)
@@ -383,6 +394,7 @@
                 worldLocation = Position.ConsoleLocationToWorld(CellSize.X, CellSize.Y);
 
             return Matrix.CreateTranslation(worldLocation.X, worldLocation.Y, 0f);
+            //return Matrix.Add(Matrix.CreateTranslation(worldLocation.X, worldLocation.Y, 0f), Matrix.CreateTranslation(_cellSize.X, _cellSize.Y, 0f));
         }
 
         /// <summary>

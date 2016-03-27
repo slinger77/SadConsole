@@ -20,6 +20,8 @@ namespace SadConsole
 
         public bool IsDefault { get; set; }
 
+        public int SolidCharacterIndex { get; set; } = 219;
+
         [IgnoreDataMember]
         public int Rows { get { return Image.Height / (CellHeight + CellPadding); } }
 
@@ -28,6 +30,9 @@ namespace SadConsole
 
         [IgnoreDataMember]
         public Rectangle[] CharacterIndexRects;
+
+        [IgnoreDataMember]
+        public Rectangle SolidCharacterRectangle;
 
         #region Constructors
         public Font() { }
@@ -87,6 +92,8 @@ namespace SadConsole
                 else
                     CharacterIndexRects[i] = new Rectangle(cx * CellWidth, cy * CellHeight, CellWidth, CellHeight);
             }
+
+            SolidCharacterRectangle = CharacterIndexRects[SolidCharacterIndex];
         }
 
         private void GetImageMask()
