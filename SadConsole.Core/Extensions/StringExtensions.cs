@@ -1,5 +1,4 @@
 ﻿#if SFML
-using Rectangle = SFML.Graphics.IntRect;
 using SFML.Graphics;
 #elif MONOGAME
 using Microsoft.Xna.Framework;

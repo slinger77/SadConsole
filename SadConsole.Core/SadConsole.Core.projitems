@@ -12,7 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Algorithms.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Cell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CellAppearance.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColoredString.Commands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColoredString.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Consoles\AnimatedTextSurface.cs" />
@@ -68,6 +67,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GraphicSystems\MonoGame\SadConsoleGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GraphicSystems\MonoGame\EngineGameComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GraphicSystems\MonoGame\MonoGameEngine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GraphicSystems\OpenTK\OpenTKEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GraphicSystems\SFML\SFMLEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ICellAppearance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\AsciiKey.cs" />
@@ -87,10 +87,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Instructions\Wait.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDraw.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MathHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Point.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PositionedCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Readers\TextureToSurfaceReader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Rectangle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shapes\Box.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shapes\Circle.cs" />
