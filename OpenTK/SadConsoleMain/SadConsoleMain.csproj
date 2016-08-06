@@ -57,23 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomConsoles\BorderedConsole.cs" />
-    <Compile Include="CustomConsoles\CachedConsole.cs" />
-    <Compile Include="CustomConsoles\ControlsTest.cs" />
-    <Compile Include="CustomConsoles\CursorConsole.cs" />
-    <Compile Include="CustomConsoles\DOSConsole.cs" />
-    <Compile Include="CustomConsoles\GameObjectConsole.cs" />
-    <Compile Include="CustomConsoles\RandomScrollingConsole.cs" />
-    <Compile Include="CustomConsoles\SplashScreen.cs" />
-    <Compile Include="CustomConsoles\StaticConsole.cs" />
-    <Compile Include="CustomConsoles\StretchedConsole.cs" />
-    <Compile Include="CustomConsoles\StringParsingConsole.cs" />
-    <Compile Include="CustomConsoles\ViewsAndSubViews.cs" />
-    <Compile Include="CustomConsoles\WorldGenerationConsole.cs" />
-    <Compile Include="InputHandling\ClassicConsoleKeyboardHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Theme.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -90,13 +75,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
-  <Import Project="..\..\SadConsole.Core\SadConsole.Core.projitems" Label="Shared" />
-  <Import Project="..\..\SadConsole.Controls\SadConsole.Controls.projitems" Label="Shared" />
-  <Import Project="..\..\SadConsole.GameHelpers\SadConsole.GameHelpers.projitems" Label="Shared" />
-  <Import Project="..\..\SadConsole.Ansi\SadConsole.Ansi.projitems" Label="Shared" />
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
