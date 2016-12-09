@@ -5,9 +5,12 @@ using Point = SFML.System.Vector2i;
 #elif MONOGAME
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+#elif WINDOWS_UWP
+using Windows.UI;
 #endif
 
 using System.Runtime.Serialization;
+
 
 namespace SadConsole
 {
@@ -122,8 +125,8 @@ namespace SadConsole
         /// </summary>
         public virtual void Reset()
         {
-            Foreground = Color.White;
-            Background = Color.Transparent;
+            Foreground = Colors.White;
+            Background = Colors.Transparent;
             GlyphIndex = 0;
             IsVisible = true;
             SpriteEffect = SpriteEffects.None;

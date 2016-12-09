@@ -31,6 +31,11 @@ namespace SadConsole
             return t + (a - t) * b;
         }
 
+        public static int Lerp(int t, int a, int b)
+        {
+            return t + (a - t) * b;
+        }
+
         public static double QuinticBlend(double t)
         {
             return t * t * t * (t * (t * 6 - 15) + 10);

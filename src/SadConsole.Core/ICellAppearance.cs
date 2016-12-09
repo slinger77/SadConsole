@@ -3,6 +3,8 @@ using SFML.Graphics;
 #elif MONOGAME
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+#elif WINDOWS_UWP
+using Windows.UI;
 #endif
 
 namespace SadConsole

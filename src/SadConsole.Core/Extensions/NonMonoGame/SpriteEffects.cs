@@ -1,6 +1,8 @@
 ﻿#if !MONOGAME
 #if SFML
 namespace SFML.Graphics
+#elif WINDOWS_UWP
+namespace Windows.UI
 #endif
 {
     using global::System;

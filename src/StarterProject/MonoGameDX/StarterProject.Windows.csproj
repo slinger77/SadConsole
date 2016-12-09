@@ -85,24 +85,6 @@
     </None>
     <None Include="Rendering.cd" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Projects.MonoGameDX\SadConsole.Ansi\SadConsole.Ansi.Windows.csproj">
-      <Project>{55695088-7d09-4704-9d0c-7c69e0de6d47}</Project>
-      <Name>SadConsole.Ansi.Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Projects.MonoGameDX\SadConsole.Controls\SadConsole.Controls.Windows.csproj">
-      <Project>{46f11907-cef3-4069-b041-0a88880981e6}</Project>
-      <Name>SadConsole.Controls.Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Projects.MonoGameDX\SadConsole.Core\SadConsole.Core.Windows.csproj">
-      <Project>{9a7432d8-0c8b-4c46-b405-b6d1080e6811}</Project>
-      <Name>SadConsole.Core.Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Projects.MonoGameDX\SadConsole.GameHelpers\SadConsole.GameHelpers.Windows.csproj">
-      <Project>{d348c254-ab16-4b48-9f61-2ffee51dfd4a}</Project>
-      <Name>SadConsole.GameHelpers.Windows</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="..\SharedCode\StarterProject.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

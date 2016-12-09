@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 
 #if SFML
@@ -7,27 +8,29 @@ namespace SFML.Graphics
 #elif MONOGAME
 using ColorHelper = Microsoft.Xna.Framework.Color;
 namespace Microsoft.Xna.Framework
+#elif WINDOWS_UWP
+namespace Windows.UI
 #endif
 {
     public static class ColorAnsi
     {
-        public static readonly Color Black = new Color(0, 0, 0);
-        public static readonly Color Red = new Color(170, 0, 0);
-        public static readonly Color Green = new Color(0, 170, 0);
-        public static readonly Color Yellow = new Color(170, 85, 0);
-        public static readonly Color Blue = new Color(0, 0, 170);
-        public static readonly Color Magenta = new Color(170, 0, 170);
-        public static readonly Color Cyan = new Color(0, 170, 170);
-        public static readonly Color White = new Color(170, 170, 170);
+        public static readonly Color Black = SadConsole.Internal.Color.Create(0, 0, 0, 255);
+        public static readonly Color Red = SadConsole.Internal.Color.Create(170, 0, 0, 255);
+        public static readonly Color Green = SadConsole.Internal.Color.Create(0, 170, 0, 255);
+        public static readonly Color Yellow = SadConsole.Internal.Color.Create(170, 85, 0, 255);
+        public static readonly Color Blue = SadConsole.Internal.Color.Create(0, 0, 170, 255);
+        public static readonly Color Magenta = SadConsole.Internal.Color.Create(170, 0, 170, 255);
+        public static readonly Color Cyan = SadConsole.Internal.Color.Create(0, 170, 170, 255);
+        public static readonly Color White = SadConsole.Internal.Color.Create(170, 170, 170, 255);
 
-        public static readonly Color BlackBright = new Color(85, 85, 85);
-        public static readonly Color RedBright = new Color(255, 85, 85);
-        public static readonly Color GreenBright = new Color(85, 255, 85);
-        public static readonly Color YellowBright = new Color(255, 255, 85);
-        public static readonly Color BlueBright = new Color(85, 85, 255);
-        public static readonly Color MagentaBright = new Color(255, 85, 255);
-        public static readonly Color CyanBright = new Color(85, 255, 255);
-        public static readonly Color WhiteBright = new Color(255, 255, 255);
+        public static readonly Color BlackBright = SadConsole.Internal.Color.Create(85, 85, 85, 255);
+        public static readonly Color RedBright = SadConsole.Internal.Color.Create(255, 85, 85, 255);
+        public static readonly Color GreenBright = SadConsole.Internal.Color.Create(85, 255, 85, 255);
+        public static readonly Color YellowBright = SadConsole.Internal.Color.Create(255, 255, 85, 255);
+        public static readonly Color BlueBright = SadConsole.Internal.Color.Create(85, 85, 255, 255);
+        public static readonly Color MagentaBright = SadConsole.Internal.Color.Create(255, 85, 255, 255);
+        public static readonly Color CyanBright = SadConsole.Internal.Color.Create(85, 255, 255, 255);
+        public static readonly Color WhiteBright = SadConsole.Internal.Color.Create(255, 255, 255, 255);
     }
 
     public static class ColorExtensions
@@ -73,7 +76,7 @@ namespace Microsoft.Xna.Framework
             {
                 lerpTotal += stopStrength;
 
-                colors[i] = ColorHelper.Lerp(color, endingColor, lerpTotal);
+                colors[i] = SadConsole.Internal.Color.Lerp(color, endingColor, lerpTotal);
             }
 
             return colors;
@@ -118,7 +121,7 @@ namespace Microsoft.Xna.Framework
 
         public static Color GetRandomColor(this Color color, Random random)
         {
-            return new Color((byte)random.Next(255), (byte)random.Next(255), (byte)random.Next(255));
+            return SadConsole.Internal.Color.Create((byte)random.Next(255), (byte)random.Next(255), (byte)random.Next(255), 255);
         }
 
         /// <summary>
@@ -128,7 +131,7 @@ namespace Microsoft.Xna.Framework
         /// <returns></returns>
         public static Color RedOnly(this Color color)
         {
-            return new Color(color.R, 0, 0);
+            return SadConsole.Internal.Color.Create(color.R, 0, 0, 255);
         }
 
         /// <summary>
@@ -138,7 +141,7 @@ namespace Microsoft.Xna.Framework
         /// <returns></returns>
         public static Color GreenOnly(this Color color)
         {
-            return new Color(0, color.G, 0);
+            return SadConsole.Internal.Color.Create(0, color.G, 0, 255);
         }
 
         /// <summary>
@@ -148,7 +151,7 @@ namespace Microsoft.Xna.Framework
         /// <returns></returns>
         public static Color BlueOnly(this Color color)
         {
-            return new Color(0, 0, color.B);
+            return SadConsole.Internal.Color.Create(0, 0, color.B, 255);
         }
 
         public static float GetLuma(this Color color)
@@ -354,7 +357,7 @@ namespace Microsoft.Xna.Framework
     {
         public static Color FromPackedValue(uint value)
         {
-            Color returnColor = new Color();
+            Color returnColor = SadConsole.Internal.Color.Create();
             returnColor.PackedValue = value;
             return returnColor;
         }
