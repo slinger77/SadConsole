@@ -1,8 +1,8 @@
 # SadConsole #
 
-[![Join the chat at https://gitter.im/Thraka/SadConsole](https://badges.gitter.im/Thraka/SadConsole.svg)](https://gitter.im/Thraka/SadConsole?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+>**ARCHIVE**  
+>This code is an archive of the original V2 version of the library, prior to the big rewrite of V3 and a new versioning scheme.
 
-[![nugetpkg](https://img.shields.io/badge/nuget-SadConsole-orange.svg)](http://www.nuget.org/packages/SadConsole.Core/)
 
 SadConsole is an MonoGame 3.4-based game library that provides an engine to emulate old-school console and command prompt style graphics. One or more textures are used to represent the standard ascii character set. SadConsole allows you to create console instances which can be managed independently of each other. A console is made up of individual cells which can have a foreground, background, character, and a special effect applied to it. 
 
