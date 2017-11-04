@@ -101,7 +101,7 @@ namespace SadConsole
                     catch (System.Exception e1)
                     {
 #if DEBUG
-                        throw e1;
+                        //throw e1;
 #endif
                     }
                 }
