@@ -9,7 +9,7 @@ namespace StarterProject
     class Program
     {
         private static Windows.CharacterViewer _characterWindow;
-        private static Container MainConsole;
+        static Container MainConsole;
 
         static void Main(string[] args)
         {

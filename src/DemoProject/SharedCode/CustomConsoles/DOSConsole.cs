@@ -4,67 +4,69 @@ using System;
 
 namespace StarterProject.CustomConsoles
 {
-    class DOSConsole: SadConsole.Console, IConsoleMetadata
-    {
-        public string Prompt { get; set; }
+	class DOSConsole : SadConsole.Console, IConsoleMetadata
 
-        private InputHandling.ClassicConsoleKeyboardHandler _keyboardHandlerObject;
+	{
+		public string Prompt { get; set; }
 
-        public ConsoleMetadata Metadata
-        {
-            get
-            {
-                return new ConsoleMetadata() { Title = "Prompt Console", Summary = "Emulates a command prompt" };
-            }
-        }
+		private InputHandling.ClassicConsoleKeyboardHandler _keyboardHandlerObject;
 
-        // This console domonstrates a classic MS-DOS or Windows Command Prompt style console.
-        public DOSConsole()
-            : base(80, 23)
-        {
-            this.IsVisible = false;
+		public ConsoleMetadata Metadata
+		{
+			get
+			{
+				return new ConsoleMetadata() { Title = "Prompt Console", Summary = "Emulates a command prompt" };
+			}
+		}
 
-            // This is our cusotmer keyboard handler we'll be using to process the cursor on this console.
-            _keyboardHandlerObject = new InputHandling.ClassicConsoleKeyboardHandler();
+		// This console domonstrates a classic MS-DOS or Windows Command Prompt style console.
+		public DOSConsole() : base(80, 23)
+		{
+			this.IsVisible = false;
 
-            // Assign our custom handler method from our handler object to this consoles keyboard handler.
-            // We could have overridden the ProcessKeyboard method, but I wanted to demonstrate how you
-            // can use your own handler on any console type.
-            KeyboardHandler = _keyboardHandlerObject.HandleKeyboard;
+			// This is our cusotmer keyboard handler we'll be using to process the cursor on this console.
+			_keyboardHandlerObject = new InputHandling.ClassicConsoleKeyboardHandler();
 
-            // Our custom handler has a call back for processing the commands the user types. We could handle
-            // this in any method object anywhere, but we've implemented it on this console directly.
-            _keyboardHandlerObject.EnterPressedAction = EnterPressedActionHandler;
+			// Assign our custom handler method from our handler object to this consoles keyboard handler.
+			// We could have overridden the ProcessKeyboard method, but I wanted to demonstrate how you
+			// can use your own handler on any console type.
+			KeyboardHandler = _keyboardHandlerObject.HandleKeyboard;
 
-            // Enable the keyboard and setup the prompt.
-            UseKeyboard = true;
-            virtualCursor.IsVisible = true;
-            Prompt = "Prompt> ";
+			// Our custom handler has a call back for processing the commands the user types. We could handle
+			// this in any method object anywhere, but we've implemented it on this console directly.
+			_keyboardHandlerObject.EnterPressedAction = EnterPressedActionHandler;
+
+			// Enable the keyboard and setup the prompt.
+			UseKeyboard = true;
+			virtualCursor.IsVisible = true;
+			Prompt = "Prompt> ";
 
 
-            // Startup description
-            ClearText();
-            VirtualCursor.Position = new Point(0, 24);
-            VirtualCursor.Print("Try typing in the following commands: help, ver, cls, look. If you type exit or quit, the program will end.").NewLine().NewLine();
-            _keyboardHandlerObject.VirtualCursorLastY = 24;
-            TimesShiftedUp = 0;
+			// Startup description
+			ClearText();
+			VirtualCursor.Position = new Point(0, 24);
+			VirtualCursor.Print("Try typing in the following commands: help, ver, cls, look. If you type exit or quit, the program will end.").NewLine().NewLine();
+			_keyboardHandlerObject.VirtualCursorLastY = 24;
+			TimesShiftedUp = 0;
 
-            virtualCursor.DisableWordBreak = true;
-            virtualCursor.Print(Prompt);
-            virtualCursor.DisableWordBreak = false;
-        }
+			virtualCursor.DisableWordBreak = true;
+			virtualCursor.Print(Prompt);
+			virtualCursor.DisableWordBreak = false;
+		}
 
-        public void ClearText()
-        {
-            Clear();
-            VirtualCursor.Position = new Point(0, 24);
-            _keyboardHandlerObject.VirtualCursorLastY = 24;
-        }
+		public void ClearText()
+		{
+			Clear();
+			VirtualCursor.Position = new Point(0, 24);
+			_keyboardHandlerObject.VirtualCursorLastY = 24;
+		}
 
-        private void EnterPressedActionHandler(string value)
-        {
+		public void EnterPressedActionHandler(string value)
+		{
+			//MessageBoxZ.MessageZ();
 			if (value.ToLower() == "help")
 			{
+
 				VirtualCursor.NewLine().
 							  Print("  Advanced Example: Command Prompt - HELP").NewLine().
 							  Print("  =======================================").NewLine().NewLine().
@@ -81,6 +83,11 @@ namespace StarterProject.CustomConsoles
 			else if (value.ToLower() == "cls")
 				ClearText();
 
+			else if (value.ToLower() == "cls2")
+			{
+				//Program.MainConsole.middleConsolel.Clear();
+			}
+
 			else if (value.ToLower() == "look")
 				VirtualCursor.Print("  Looking around you discover that you are in a dark and empty room. To your left there is a computer monitor in front of you and Visual Studio is opened, waiting for your next command.").NewLine();
 
@@ -89,12 +96,29 @@ namespace StarterProject.CustomConsoles
 
 			else if (value.ToLower() == "1")
 			{
-				//StarterProject.Program.MainConsole.consoles[1].VirtualCursor.Print("aaaaaaaaaaaaaaaa");
-				//StarterProject.Program.MainConsole.middleConsolel.VirtualCursor.Print("1");
+				StarterProject.Program.MainConsole.middleConsolel.VirtualCursor.Print("1");
+			}
+
+			else if (value.ToLower() == "2")
+			{
+				//Program.MainConsole.consoles[0].VirtualCursor.NewLine().Print("out_put text").NewLine().Print("vvv");
+				Program.MainConsole.middleConsolel.Clear();
+			}
+
+			else if (value.ToLower() == "3")
+			{
+				//Program.zz.ShitMethod();
 			}
 
 			else
-				VirtualCursor.Print("  Unknown command").NewLine();
-        }
-    }
+				virtualCursor.Print("unknown command");
+
+			//else
+			//VirtualCursor.Print("value").NewLine
+			//virtualCursor.Print(value).NewLine();
+		}
+
+
+	}
+
 }

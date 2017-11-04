@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)!Staff\GameObjectTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)!Staff\MiddleConsole.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)!Staff\ShitClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleMetadata.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Container.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CustomConsoles\AnsiConsole.cs" />

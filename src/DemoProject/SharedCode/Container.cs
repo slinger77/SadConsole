@@ -9,75 +9,88 @@ using StarterProject.CustomConsoles;
 
 namespace StarterProject
 {
-    class Container : ConsoleContainer
-    {
-        private int currentConsoleIndex = -1;
-        private IConsoleMetadata selectedConsole;
-        private HeaderConsole headerConsole;
+	class Container : ConsoleContainer
+	{
+		private int currentConsoleIndex = -1;
+		private IConsoleMetadata selectedConsole;
+		private HeaderConsole headerConsole; // Console on top of the screen
 
-        IConsoleMetadata[] consoles;
+		public MiddleConsole middleConsolel; // My test console
+		public GameObjectTest gameObjectConsole; // My game object console
 
-        public Container()
-        {
-            headerConsole = new HeaderConsole();
+		public IConsoleMetadata[] consoles;
 
-            //var console1 = new Console(10, 10, Serializer.Load<FontMaster>("Fonts/Cheepicus12.font").GetFont(Font.FontSizes.Two));
-            //console1.Fill(Color.BlueViolet, Color.Yellow, 7);
-            //var consoleReal = new StretchedConsole();
-            //consoleReal.TextSurface = console1.TextSurface;
+		public Container()
+		{
+			headerConsole = new HeaderConsole();
 
-            consoles = new IConsoleMetadata[] {
-                //consoleReal,
+			middleConsolel = new MiddleConsole(); // My middle console instance
+			gameObjectConsole = new GameObjectTest(); // My game object instance
+
+			//var console1 = new Console(10, 10, Serializer.Load<FontMaster>("Fonts/Cheepicus12.font").GetFont(Font.FontSizes.Two));
+			//console1.Fill(Color.BlueViolet, Color.Yellow, 7);
+			//var consoleReal = new StretchedConsole();
+			//consoleReal.TextSurface = console1.TextSurface;
+
+			consoles = new IConsoleMetadata[] {
+                
                 //new CustomConsoles.MouseRenderingDebug(),
-                new CustomConsoles.AutoTypingConsole(),
-                new CustomConsoles.SerializationTests(),
-                new CustomConsoles.SplashScreen() { SplashCompleted = () => MoveNextConsole() },
-                new CustomConsoles.StringParsingConsole(),
-                new CustomConsoles.TextCursorConsole(),
-                new CustomConsoles.ViewsAndSubViews(),
-                new CustomConsoles.ControlsTest(),
-                new CustomConsoles.SubConsoleCursor(),
+                //new CustomConsoles.AutoTypingConsole(),
+                //new CustomConsoles.SerializationTests(),
+                //new CustomConsoles.SplashScreen() { SplashCompleted = () => MoveNextConsole() },
+                //new CustomConsoles.StringParsingConsole(),
+                //new CustomConsoles.TextCursorConsole(),
+                //new CustomConsoles.ViewsAndSubViews(),
+                //new CustomConsoles.ControlsTest(),
+                //new CustomConsoles.SubConsoleCursor(),
                 new CustomConsoles.DOSConsole(),
-                new CustomConsoles.GameObjectConsole(),
-                new CustomConsoles.SceneProjectionConsole(),
-                new CustomConsoles.AnsiConsole(),
-                new CustomConsoles.StretchedConsole(),
-                new CustomConsoles.WorldGenerationConsole(),
-                new CustomConsoles.RandomScrollingConsole(),
+                //new CustomConsoles.GameObjectConsole(),
+                //new CustomConsoles.SceneProjectionConsole(),
+                //new CustomConsoles.AnsiConsole(),
+                //new CustomConsoles.StretchedConsole(),
+                //new CustomConsoles.WorldGenerationConsole(),
+                //new CustomConsoles.RandomScrollingConsole(),
             };
 
-            MoveNextConsole();
-        }
+			MoveNextConsole();
+		}
 
-        public void MoveNextConsole()
-        {
-            currentConsoleIndex++;
+		public void MoveNextConsole()
+		{
+			currentConsoleIndex++;
 
-            if (currentConsoleIndex >= consoles.Length)
-                currentConsoleIndex = 0;
+			if (currentConsoleIndex >= consoles.Length)
+				currentConsoleIndex = 0;
 
-            selectedConsole = consoles[currentConsoleIndex];
+			selectedConsole = consoles[currentConsoleIndex];
 
-            Children.Clear();
-            Children.Add(selectedConsole);
-            Children.Add(headerConsole);
+			Children.Clear();
+			Children.Add(selectedConsole);
+			Children.Add(headerConsole); // Header console
 
-            selectedConsole.IsVisible = true;
-            selectedConsole.IsFocused = true;
-            selectedConsole.Position = new Point(0, 2);
+			Children.Add(middleConsolel); // Middle console
+			Children.Add(gameObjectConsole); // Game object added
 
-            Global.FocusedConsoles.Set(selectedConsole);
-            headerConsole.SetConsole(selectedConsole);
-        }
+			selectedConsole.IsVisible = true;
+			selectedConsole.IsFocused = true;
+			selectedConsole.Position = new Point(0, 2); // Main console position. 2 Points down from the top
 
-        //public override bool ProcessKeyboard(Keyboard state)
-        //{
-        //    return selectedConsole.ProcessKeyboard(state);
-        //}
+			middleConsolel.Position = new Point(20, 5); // Set position of middleConsole
+			gameObjectConsole.Position = new Point(40, 5); // Set position of game object
 
-        //public override bool ProcessMouse(MouseConsoleState state)
-        //{
-        //    return selectedConsole.ProcessMouse(state);
-        //}
-    }
+			Global.FocusedConsoles.Set(selectedConsole);
+			headerConsole.SetConsole(selectedConsole);
+			middleConsolel.SetConsole(selectedConsole);
+		}
+
+		//public override bool ProcessKeyboard(Keyboard state)
+		//{
+		//    return selectedConsole.ProcessKeyboard(state);
+		//}
+
+		//public override bool ProcessMouse(MouseConsoleState state)
+		//{
+		//    return selectedConsole.ProcessMouse(state);
+		//}
+	}
 }
