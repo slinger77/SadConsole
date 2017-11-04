@@ -63,32 +63,38 @@ namespace StarterProject.CustomConsoles
 
         private void EnterPressedActionHandler(string value)
         {
-            if (value.ToLower() == "help")
-            {
-                VirtualCursor.NewLine().
-                              Print("  Advanced Example: Command Prompt - HELP").NewLine().
-                              Print("  =======================================").NewLine().NewLine().
-                              Print("  help      - Display this help info").NewLine().
-                              Print("  ver       - Display version info").NewLine().
-                              Print("  cls       - Clear the screen").NewLine().
-                              Print("  look      - Example adventure game cmd").NewLine().
-                              Print("  exit,quit - Quit the program").NewLine().
-                              Print("  ").NewLine();
-            }
-            else if (value.ToLower() == "ver")
-                VirtualCursor.Print("  SadConsole for MonoGame").NewLine();
+			if (value.ToLower() == "help")
+			{
+				VirtualCursor.NewLine().
+							  Print("  Advanced Example: Command Prompt - HELP").NewLine().
+							  Print("  =======================================").NewLine().NewLine().
+							  Print("  help      - Display this help info").NewLine().
+							  Print("  ver       - Display version info").NewLine().
+							  Print("  cls       - Clear the screen").NewLine().
+							  Print("  look      - Example adventure game cmd").NewLine().
+							  Print("  exit,quit - Quit the program").NewLine().
+							  Print("  ").NewLine();
+			}
+			else if (value.ToLower() == "ver")
+				VirtualCursor.Print("  SadConsole for MonoGame").NewLine();
 
-            else if (value.ToLower() == "cls")
-                ClearText();
+			else if (value.ToLower() == "cls")
+				ClearText();
 
-            else if (value.ToLower() == "look")
-                VirtualCursor.Print("  Looking around you discover that you are in a dark and empty room. To your left there is a computer monitor in front of you and Visual Studio is opened, waiting for your next command.").NewLine();
+			else if (value.ToLower() == "look")
+				VirtualCursor.Print("  Looking around you discover that you are in a dark and empty room. To your left there is a computer monitor in front of you and Visual Studio is opened, waiting for your next command.").NewLine();
 
-            else if (value.ToLower() == "exit" || value.ToLower() == "quit")
-                Environment.Exit(0);
+			else if (value.ToLower() == "exit" || value.ToLower() == "quit")
+				Environment.Exit(0);
 
-            else
-                VirtualCursor.Print("  Unknown command").NewLine();
+			else if (value.ToLower() == "1")
+			{
+				//StarterProject.Program.MainConsole.consoles[1].VirtualCursor.Print("aaaaaaaaaaaaaaaa");
+				//StarterProject.Program.MainConsole.middleConsolel.VirtualCursor.Print("1");
+			}
+
+			else
+				VirtualCursor.Print("  Unknown command").NewLine();
         }
     }
 }
